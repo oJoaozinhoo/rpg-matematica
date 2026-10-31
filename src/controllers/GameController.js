@@ -184,25 +184,37 @@ function stopTimer() {
 
 // Mostra a resolução e informa se o jogador acertou ou errou.
 function showExplanation(correct = false) {
+  const screen = document.getElementById("explanation-screen");
   const badge = document.getElementById("result-badge");
+  const answer = document.getElementById("explanation-answer");
+  const explanation = document.getElementById("explanation-text");
 
-  if (correct) {
-    badge.textContent = "✓ VOCÊ ACERTOU!";
-    badge.className =
-      "rounded-full px-4 py-2 text-sm font-bold border border-emerald-400/50 bg-emerald-500/20 text-emerald-300";
-  } else {
-    badge.textContent = "✕ VOCÊ ERROU!";
-    badge.className =
-      "rounded-full px-4 py-2 text-sm font-bold border border-red-400/50 bg-red-500/20 text-red-300";
+  if (!screen || !answer || !explanation) {
+    console.error("Elemento da resolução não encontrado:", {
+      screen,
+      answer,
+      explanation,
+      badge
+    });
+    return;
   }
 
-  document.getElementById("explanation-answer").textContent =
-    `Resposta correta: ${getCurrentAnswer()}`;
+  if (badge) {
+    badge.textContent = correct
+      ? "✓ VOCÊ ACERTOU!"
+      : "✕ VOCÊ ERROU!";
 
-  document.getElementById("explanation-text").textContent =
-    getCurrentExplanation();
+    badge.className = correct
+      ? "rounded-full px-4 py-2 text-sm font-bold border border-emerald-400/50 bg-emerald-500/20 text-emerald-300"
+      : "rounded-full px-4 py-2 text-sm font-bold border border-red-400/50 bg-red-500/20 text-red-300";
+  }
 
-  document.getElementById("explanation-screen").classList.remove("hidden");
+  answer.textContent = `Resposta correta: ${getCurrentAnswer()}`;
+
+  explanation.textContent =
+    getCurrentExplanation() || "Resolução não disponível.";
+
+  screen.classList.remove("hidden");
 }
 
 // Fecha a explicação e continua a partida.
