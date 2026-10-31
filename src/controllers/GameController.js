@@ -4,6 +4,7 @@ import {
   generateQuestion,
   getCurrentAnswer,
   getCurrentTopic,
+  getCurrentExplanation,
 } from "../services/CombatService.js";
 import {
   updateScore,
@@ -120,6 +121,7 @@ function normalizeTopicName(topic) {
 function registerTopicResult(topic, field) {
   const normalizedTopic = normalizeTopicName(topic);
   const { statsByTopic } = getState();
+
   const current = statsByTopic[normalizedTopic] || {
     correct: 0,
     wrong: 0,
@@ -180,6 +182,33 @@ function stopTimer() {
   }
 }
 
+// Mostra a resolução da questão atual.
+function showExplanation() {
+  document.getElementById("explanation-answer").textContent =
+    `Resposta correta: ${getCurrentAnswer()}`;
+
+  document.getElementById("explanation-text").textContent =
+    getCurrentExplanation();
+
+  document.getElementById("explanation-screen").classList.remove("hidden");
+}
+
+// Fecha a explicação e continua a partida.
+function continueAfterExplanation() {
+  document.getElementById("explanation-screen").classList.add("hidden");
+
+  const updated = getState();
+
+  if (updated.playerHP <= 0 || updated.enemyHP <= 0) {
+    endGame();
+    return;
+  }
+
+  generateQuestion(updated.difficulty, onAnswer);
+  setState({ locked: false });
+  startQuestionTimer();
+}
+
 function resolveTimeout() {
   const {
     locked,
@@ -196,6 +225,7 @@ function resolveTimeout() {
   const topic = getCurrentTopic();
   const penalty = PENALTY_BY_LEVEL[difficulty] ?? 5;
   const damageBase = { facil: 15, normal: 20, dificil: 25 };
+
   const damage =
     (damageBase[difficulty] ?? 20) + Math.floor(Math.random() * 6) - 2;
 
@@ -234,25 +264,19 @@ function resolveTimeout() {
   }
 
   const updated = getState();
+
   updateBars(updated.playerHP, updated.enemyHP);
   updateScore(updated.score);
   shakeArena();
 
-  setTimeout(() => {
-    if (updated.playerHP <= 0 || updated.enemyHP <= 0) {
-      endGame();
-    } else {
-      generateQuestion(updated.difficulty, onAnswer);
-      setState({ locked: false });
-      startQuestionTimer();
-    }
-  }, 820);
+  showExplanation();
 }
 
 function startQuestionTimer() {
   stopTimer();
 
   const limit = selectedTimeLimit;
+
   if (limit === null) {
     updateTimerDisplay(null);
     return;
@@ -270,6 +294,7 @@ function startQuestionTimer() {
     }
 
     const nextTime = timeLeft - 1;
+
     setState({ timeLeft: nextTime });
     updateTimerDisplay(nextTime);
 
@@ -302,7 +327,12 @@ function onAnswer(selected) {
   lockAnswers();
   stopTimer();
 
-  const DAMAGE_BY_LEVEL = { facil: 15, normal: 20, dificil: 25 };
+  const DAMAGE_BY_LEVEL = {
+    facil: 15,
+    normal: 20,
+    dificil: 25,
+  };
+
   const base = DAMAGE_BY_LEVEL[difficulty] ?? 20;
   const randomBonus = Math.floor(Math.random() * 6) - 2;
   const correct = selected === getCurrentAnswer();
@@ -374,19 +404,12 @@ function onAnswer(selected) {
   }
 
   const updated = getState();
+
   updateBars(updated.playerHP, updated.enemyHP);
   updateScore(updated.score);
   shakeArena();
 
-  setTimeout(() => {
-    if (updated.playerHP <= 0 || updated.enemyHP <= 0) {
-      endGame();
-    } else {
-      generateQuestion(updated.difficulty, onAnswer);
-      setState({ locked: false });
-      startQuestionTimer();
-    }
-  }, 820);
+  showExplanation();
 }
 
 function startGame(difficulty, gameMode = "classic") {
@@ -395,11 +418,15 @@ function startGame(difficulty, gameMode = "classic") {
   fadeOutThen("menu", () => {
     hide("menu");
     show("game-view");
+
     updateBars(100, 100);
     updateScore(0);
+
     setLog(gameMode === "one-error" ? "MODO ONE ERROR" : "");
+
     generateQuestion(difficulty, onAnswer);
     setState({ locked: false });
+
     startQuestionTimer();
   });
 }
@@ -439,13 +466,18 @@ function endGame() {
 
 function restartGame() {
   stopTimer();
+
+  document.getElementById("explanation-screen").classList.add("hidden");
+
   hide("end-screen");
   show("menu");
 }
 
 function dismissIntro() {
   const intro = document.getElementById("intro");
+
   intro.classList.add("anim-intro-out");
+
   setTimeout(() => {
     hide("intro");
     show("menu");
@@ -463,11 +495,25 @@ function bindEvents() {
           "bg-gold/20",
           "text-gold-light",
         );
-        item.classList.add("border-white/15", "bg-black/35", "text-white/80");
+
+        item.classList.add(
+          "border-white/15",
+          "bg-black/35",
+          "text-white/80",
+        );
       });
 
-      btn.classList.remove("border-white/15", "bg-black/35", "text-white/80");
-      btn.classList.add("border-gold/40", "bg-gold/20", "text-gold-light");
+      btn.classList.remove(
+        "border-white/15",
+        "bg-black/35",
+        "text-white/80",
+      );
+
+      btn.classList.add(
+        "border-gold/40",
+        "bg-gold/20",
+        "text-gold-light",
+      );
 
       selectedTimeLimit =
         btn.dataset.time === "free" ? null : Number(btn.dataset.time);
@@ -481,7 +527,13 @@ function bindEvents() {
     });
   });
 
-  document.getElementById("restart-btn").addEventListener("click", restartGame);
+  document
+    .getElementById("continue-btn")
+    .addEventListener("click", continueAfterExplanation);
+
+  document
+    .getElementById("restart-btn")
+    .addEventListener("click", restartGame);
 }
 
 bindEvents();
