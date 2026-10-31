@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="pt-BR">
   <head>
@@ -35,6 +36,7 @@
   <body
     class="h-screen w-screen overflow-hidden bg-[#0a0812] text-[#ede8d8] font-body select-none"
   >
+    <!-- INTRODUÇÃO -->
     <div
       id="intro"
       class="overlay-before fixed inset-0 z-50 cursor-pointer bg-[url('./image/map.png')] bg-cover bg-center flex items-center justify-center"
@@ -72,6 +74,7 @@
       </div>
     </div>
 
+    <!-- MENU -->
     <div
       id="menu"
       class="overlay-before hidden fixed inset-0 bg-[url('./image/menu.png')] bg-cover bg-center flex items-center justify-center"
@@ -174,10 +177,12 @@
       </div>
     </div>
 
+    <!-- ÁREA DO JOGO -->
     <div
       id="game-view"
       class="hidden fixed inset-0 flex flex-col p-3 bg-[url('./image/map.png')] bg-cover bg-center gap-2 overflow-hidden"
     >
+      <!-- HUD -->
       <div
         id="hud"
         class="flex items-center justify-between gap-3 flex-shrink-0 px-1"
@@ -232,6 +237,7 @@
         </div>
       </div>
 
+      <!-- ARENA -->
       <div
         id="arena"
         class="relative flex-1 w-full max-w-4xl mx-auto bg-[url('./image/Arena.png')] bg-cover bg-center rounded-2xl border-2 border-gold/25 overflow-hidden shadow-[0_0_60px_rgba(0,0,0,0.8)]"
@@ -277,12 +283,45 @@
         </div>
       </div>
 
+      <!-- TELA DE RESOLUÇÃO -->
+      <div
+        id="explanation-screen"
+        class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+      >
+        <div
+          class="w-full max-w-xl rounded-2xl border border-gold/40 bg-[#100c1c] shadow-panel p-6 text-center"
+        >
+          <h2 class="font-display text-2xl text-gold-light mb-3">
+            📖 RESOLUÇÃO
+          </h2>
+
+          <p
+            id="explanation-answer"
+            class="text-emerald-300 font-bold text-lg mb-3"
+          ></p>
+
+          <p
+            id="explanation-text"
+            class="text-white/90 leading-relaxed text-base mb-6"
+          ></p>
+
+          <button
+            id="continue-btn"
+            class="w-full py-3 rounded-lg font-display text-lg tracking-widest text-white bg-gradient-to-br from-amber-500 to-amber-800 border border-amber-400/30 hover:brightness-110 transition-all"
+          >
+            CONTINUAR
+          </button>
+        </div>
+      </div>
+
+      <!-- MENSAGEM DA BATALHA -->
       <p
         id="log"
         class="text-center text-xl font-bold text-gold-light tracking-wide [text-shadow:0_1px_6px_rgba(0,0,0,0.9)] min-h-[1.4em] flex-shrink-0"
       ></p>
     </div>
 
+    <!-- TELA FINAL -->
     <div
       id="end-screen"
       class="hidden fixed inset-0 z-[60] bg-black/85 bg-[url('./image/menu.png')] bg-cover bg-center backdrop-blur-sm flex items-center justify-center"
@@ -332,6 +371,7 @@
       </div>
     </div>
 
+    <!-- ÁUDIOS -->
     <audio id="snd-click" src="./Songs/click.mp3" preload="auto"></audio>
     <audio id="snd-hit" src="./Songs/hit.mp3" preload="auto"></audio>
     <audio id="snd-error" src="./Songs/wrong.mp3" preload="auto"></audio>
