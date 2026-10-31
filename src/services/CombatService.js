@@ -1,4 +1,3 @@
-
 import {
   setQuestion,
   renderAnswerButtons
@@ -6,6 +5,7 @@ import {
 
 let currentAnswer = "";
 let currentTopic = "Geral";
+let currentExplanation = "";
 
 const questionPools = {
   facil: [
@@ -146,6 +146,36 @@ const questionPools = {
   ]
 };
 
+// Explicações das questões, na mesma ordem das perguntas.
+const explanations = {
+  facil: [
+    "Pelo princípio multiplicativo, multiplicamos as opções: 3 × 2 = 6 combinações.",
+    "Pelo princípio aditivo, somamos as opções: 4 + 3 = 7 bebidas.",
+    "Como escolhemos apenas uma opção, somamos: 2 + 5 = 7 possibilidades.",
+    "Escolhemos um sanduíche e um suco: 3 × 4 = 12 pedidos.",
+    "Multiplicamos as opções de camisetas pelas calças: 5 × 2 = 10 combinações.",
+    "Para cada um dos 3 caminhos existem 2 transportes: 3 × 2 = 6 possibilidades."
+  ],
+
+  normal: [
+    "Se cada uma das 9 gavetas tivesse apenas uma meia, teríamos 9 meias. Como existem 10, pelo menos uma gaveta terá 2 ou mais.",
+    "São 10 possibilidades para cada posição. Portanto: 10 × 10 = 100 senhas.",
+    "Multiplicamos as opções: 6 camisetas × 3 calças = 18 conjuntos.",
+    "São 10 opções para o primeiro algarismo, 9 para o segundo, 8 para o terceiro e 7 para o quarto: 10 × 9 × 8 × 7 = 5040 códigos.",
+    "Existem apenas 7 dias da semana para 8 pessoas. Pelo princípio da casa dos pombos, pelo menos duas fazem aniversário no mesmo dia da semana.",
+    "Multiplicamos as opções: 4 camisas × 3 calças = 12 combinações."
+  ],
+
+  dificil: [
+    "Existem 12 meses para 13 alunos. Como há mais alunos do que meses, pelo menos dois fazem aniversário no mesmo mês.",
+    "Se cada caixa tivesse no máximo 2 bolas, teríamos 3 × 2 = 6 bolas. Como são 8, alguma caixa terá pelo menos 3.",
+    "São 10 opções para o primeiro algarismo, depois 9, 8, 7 e 6: 10 × 9 × 8 × 7 × 6 = 30240 senhas.",
+    "Se cada prateleira tivesse no máximo 2 livros, seriam 3 × 2 = 6 livros. Como existem 7, alguma terá pelo menos 3.",
+    "Existem 5 computadores para 6 pessoas. Pelo princípio da casa dos pombos, pelo menos duas pessoas utilizarão o mesmo computador.",
+    "O primeiro algarismo possui 9 opções, pois não pode ser zero. Depois restam 9, 8 e 7 opções: 9 × 9 × 8 × 7 = 4536 códigos."
+  ]
+};
+
 const questionBags = {
   facil: [],
   normal: [],
@@ -186,14 +216,24 @@ function getCurrentTopic() {
   return currentTopic;
 }
 
+function getCurrentExplanation() {
+  return currentExplanation;
+}
+
 function generateQuestion(difficulty, onSelect) {
   document.getElementById("diagram").innerHTML = "";
   document.getElementById("options").innerHTML = "";
 
-  const selectedQuestion = getNextQuestion(difficulty);
+  const level = questionPools[difficulty]
+    ? difficulty
+    : "normal";
+
+  const selectedQuestion = getNextQuestion(level);
+  const questionIndex = questionPools[level].indexOf(selectedQuestion);
 
   currentAnswer = selectedQuestion.answer;
   currentTopic = selectedQuestion.topic;
+  currentExplanation = explanations[level][questionIndex];
 
   setQuestion(selectedQuestion.question);
   renderAnswerButtons(selectedQuestion.options, onSelect);
@@ -202,5 +242,6 @@ function generateQuestion(difficulty, onSelect) {
 export {
   generateQuestion,
   getCurrentAnswer,
-  getCurrentTopic
+  getCurrentTopic,
+  getCurrentExplanation
 };
