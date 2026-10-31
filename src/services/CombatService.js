@@ -1,25 +1,89 @@
-import { drawDiagram } from "../views/ArenaView.js";
-import { setQuestion, renderAnswerButtons } from "../views/ArenaView.js";
-import {
-  buildEasyPairs,
-  buildNormalPairs,
-  buildHardPairs,
-  isReflexive,
-  isSymmetric,
-  isAntisymmetric,
-  isTransitive,
-  isInjective,
-  isSurjective,
-  isBijective,
-  hasElementWithoutImage,
-  generateWrongSets,
-} from "../models/MathEngine.js";
 
-const DOMAIN = [1, 2, 3];
+import {
+  setQuestion,
+  renderAnswerButtons
+} from "../views/ArenaView.js";
 
 let currentAnswer = "";
 let currentTopic = "Geral";
 let answerCallback = () => {};
+
+const questions = [
+  {
+    question: "Ana possui 3 camisetas e 2 calças. Quantas combinações diferentes ela pode formar usando uma camiseta e uma calça?",
+    options: ["5", "6", "8", "9"],
+    answer: "6",
+    topic: "Princípio multiplicativo"
+  },
+  {
+    question: "Uma lanchonete oferece 4 tipos de suco ou 3 tipos de refrigerante. Escolhendo apenas uma bebida, quantas opções existem?",
+    options: ["7", "12", "1", "4"],
+    answer: "7",
+    topic: "Princípio aditivo"
+  },
+  {
+    question: "Existem 10 meias para serem distribuídas em 9 gavetas. O que podemos garantir?",
+    options: [
+      "Cada gaveta terá pelo menos uma meia",
+      "Pelo menos uma gaveta terá 2 meias ou mais",
+      "Todas as gavetas terão exatamente 2 meias",
+      "Nenhuma gaveta terá mais de uma meia"
+    ],
+    answer: "Pelo menos uma gaveta terá 2 meias ou mais",
+    topic: "Princípio da casa dos pombos"
+  },
+  {
+    question: "Uma lanchonete oferece 3 tipos de sanduíche e 4 tipos de suco. Quantos pedidos diferentes podem ser feitos escolhendo um de cada?",
+    options: ["7", "12", "10", "14"],
+    answer: "12",
+    topic: "Princípio multiplicativo"
+  },
+  {
+    question: "Em uma turma existem 13 alunos. Considerando os 12 meses do ano, o que podemos garantir sobre os aniversários?",
+    options: [
+      "Todos terão meses diferentes",
+      "Pelo menos dois alunos fazem aniversário no mesmo mês",
+      "Exatamente dois alunos fazem aniversário no mesmo mês",
+      "Existem 13 meses diferentes"
+    ],
+    answer: "Pelo menos dois alunos fazem aniversário no mesmo mês",
+    topic: "Princípio da casa dos pombos"
+  },
+  {
+    question: "Um restaurante oferece 2 opções de entrada ou 5 opções de prato principal. Escolhendo apenas uma opção, quantas possibilidades existem?",
+    options: ["2", "5", "7", "10"],
+    answer: "7",
+    topic: "Princípio aditivo"
+  },
+  {
+    question: "Uma senha possui 2 algarismos. Cada posição pode receber qualquer número de 0 a 9, inclusive com repetição. Quantas senhas existem?",
+    options: ["10", "100", "90", "20"],
+    answer: "100",
+    topic: "Princípio multiplicativo"
+  },
+  {
+    question: "Oito bolas serão distribuídas em 3 caixas. Qual é a quantidade mínima de bolas que podemos garantir em pelo menos uma caixa?",
+    options: ["2", "3", "4", "8"],
+    answer: "3",
+    topic: "Princípio da casa dos pombos"
+  }
+];
+
+let questionBag = [];
+
+function getNextQuestion() {
+  if (questionBag.length === 0) {
+    questionBag = questions.map((_, index) => index);
+
+    for (let i = questionBag.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [questionBag[i], questionBag[j]] =
+        [questionBag[j], questionBag[i]];
+    }
+  }
+
+  return questions[questionBag.pop()];
+}
 
 function getCurrentAnswer() {
   return currentAnswer;
@@ -29,131 +93,27 @@ function getCurrentTopic() {
   return currentTopic;
 }
 
-function applyQuestion({ answer, question, options, topic }) {
-  currentAnswer = answer;
-  currentTopic = topic || "Geral";
-  setQuestion(question);
-  renderAnswerButtons(options, answerCallback);
-}
-
-function buildEasyQuestion() {
-  const { pairs, codomain, isFunc } = buildEasyPairs();
-  drawDiagram(pairs, codomain);
-
-  applyQuestion({
-    answer: isFunc ? "E funcao" : "Nao e funcao",
-    question: "Esse diagrama representa uma funcao?",
-    options: ["E funcao", "Nao e funcao"],
-    topic: "É função",
-  });
-}
-
-function buildNormalQuestion() {
-  const { pairs, codomain } = buildNormalPairs();
-  drawDiagram(pairs, codomain);
-
-  const configs = [
-    {
-      answer: `{${DOMAIN.join(",")}}`,
-      question: "Qual e o dominio (A) da relacao?",
-      options: [`{${DOMAIN.join(",")}}`, "{1,2}", "{2,3}", "{1,3}"],
-      topic: "Domínio",
-    },
-    {
-      answer: isReflexive(pairs, DOMAIN) ? "Sim" : "Nao",
-      question: "A relacao e Reflexiva?",
-      options: ["Sim", "Nao"],
-      topic: "Reflexiva",
-    },
-    {
-      answer: isSymmetric(pairs) ? "Sim" : "Nao",
-      question: "A relacao e Simetrica?",
-      options: ["Sim", "Nao"],
-      topic: "Simétrica",
-    },
-    {
-      answer: isAntisymmetric(pairs) ? "Sim" : "Nao",
-      question: "A relacao e Antissimetrica?",
-      options: ["Sim", "Nao"],
-      topic: "Antissimétrica",
-    },
-    {
-      answer: isTransitive(pairs) ? "Sim" : "Nao",
-      question: "A relacao e Transitiva?",
-      options: ["Sim", "Nao"],
-      topic: "Transitiva",
-    },
-  ];
-
-  applyQuestion(configs[Math.floor(Math.random() * configs.length)]);
-}
-
-function buildHardQuestion() {
-  const type = Math.floor(Math.random() * 7);
-  const { pairs, codomain } = buildHardPairs(type);
-  drawDiagram(pairs, codomain);
-
-  const imgSet = [...new Set(pairs.map((p) => p[1]))].sort();
-  const isFunc = DOMAIN.every(
-    (x) => pairs.filter((p) => p[0] === x).length === 1,
-  );
-
-  const configs = [
-    {
-      answer: isFunc ? "E funcao" : "Nao e funcao",
-      question: "E uma funcao?",
-      options: ["E funcao", "Nao e funcao"],
-      topic: "É função",
-    },
-    {
-      answer: `{${imgSet.join(",")}}`,
-      question: "Qual a Imagem (Im)?",
-      options: [`{${imgSet.join(",")}}`, ...generateWrongSets(imgSet)],
-      topic: "Imagem",
-    },
-    {
-      answer: `{${codomain.join(",")}}`,
-      question: "Qual o Contradominio (CD)?",
-      options: [`{${codomain.join(",")}}`, "{1,2,3}", "{1,2,3,4}"],
-      topic: "Contradomínio",
-    },
-    {
-      answer: isInjective(pairs) ? "Sim" : "Nao",
-      question: "A funcao e Injetora?",
-      options: ["Sim", "Nao"],
-      topic: "Injetora",
-    },
-    {
-      answer: isSurjective(pairs, codomain) ? "Sim" : "Nao",
-      question: "A funcao e Sobrejetora?",
-      options: ["Sim", "Nao"],
-      topic: "Sobrejetora",
-    },
-    {
-      answer: isBijective(pairs, codomain) ? "Sim" : "Nao",
-      question: "A funcao e Bijetora?",
-      options: ["Sim", "Nao"],
-      topic: "Bijetora",
-    },
-    {
-      answer: hasElementWithoutImage(pairs, DOMAIN) ? "Sim" : "Nao",
-      question: "Ha elemento no dominio sem imagem?",
-      options: ["Sim", "Nao"],
-      topic: "Elemento sem imagem",
-    },
-  ];
-
-  applyQuestion(configs[type]);
-}
-
 function generateQuestion(difficulty, onSelect) {
   document.getElementById("diagram").innerHTML = "";
   document.getElementById("options").innerHTML = "";
+
   answerCallback = onSelect;
 
-  if (difficulty === "facil") buildEasyQuestion();
-  else if (difficulty === "normal") buildNormalQuestion();
-  else buildHardQuestion();
+  const selectedQuestion = getNextQuestion();
+
+  currentAnswer = selectedQuestion.answer;
+  currentTopic = selectedQuestion.topic;
+
+  setQuestion(selectedQuestion.question);
+
+  renderAnswerButtons(
+    selectedQuestion.options,
+    answerCallback
+  );
 }
 
-export { generateQuestion, getCurrentAnswer, getCurrentTopic };
+export {
+  generateQuestion,
+  getCurrentAnswer,
+  getCurrentTopic
+};
