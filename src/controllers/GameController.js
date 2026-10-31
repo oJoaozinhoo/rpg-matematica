@@ -182,8 +182,20 @@ function stopTimer() {
   }
 }
 
-// Mostra a resolução da questão atual.
-function showExplanation() {
+// Mostra a resolução e informa se o jogador acertou ou errou.
+function showExplanation(correct = false) {
+  const badge = document.getElementById("result-badge");
+
+  if (correct) {
+    badge.textContent = "✓ VOCÊ ACERTOU!";
+    badge.className =
+      "rounded-full px-4 py-2 text-sm font-bold border border-emerald-400/50 bg-emerald-500/20 text-emerald-300";
+  } else {
+    badge.textContent = "✕ VOCÊ ERROU!";
+    badge.className =
+      "rounded-full px-4 py-2 text-sm font-bold border border-red-400/50 bg-red-500/20 text-red-300";
+  }
+
   document.getElementById("explanation-answer").textContent =
     `Resposta correta: ${getCurrentAnswer()}`;
 
@@ -269,7 +281,7 @@ function resolveTimeout() {
   updateScore(updated.score);
   shakeArena();
 
-  showExplanation();
+  showExplanation(false);
 }
 
 function startQuestionTimer() {
@@ -379,7 +391,6 @@ function onAnswer(selected) {
     });
 
     registerTopicResult(normalizedTopic, "wrong");
-
     setLog(getOneErrorMessage(penalty));
     spawnDamageFloat("heroChar", "KO", "hero");
     animateCharacter("enemy");
@@ -396,7 +407,6 @@ function onAnswer(selected) {
     });
 
     registerTopicResult(normalizedTopic, "wrong");
-
     setLog(getMissMessage(damage, penalty));
     spawnDamageFloat("heroChar", damage, "hero");
     animateCharacter("enemy");
@@ -409,7 +419,7 @@ function onAnswer(selected) {
   updateScore(updated.score);
   shakeArena();
 
-  showExplanation();
+  showExplanation(correct);
 }
 
 function startGame(difficulty, gameMode = "classic") {
@@ -418,7 +428,6 @@ function startGame(difficulty, gameMode = "classic") {
   fadeOutThen("menu", () => {
     hide("menu");
     show("game-view");
-
     updateBars(100, 100);
     updateScore(0);
 
