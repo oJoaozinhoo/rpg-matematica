@@ -222,7 +222,6 @@ function getCurrentExplanation() {
 }
 
 function generateQuestion(difficulty, onSelect) {
-  document.getElementById("diagram").innerHTML = "";
   document.getElementById("options").innerHTML = "";
 
   const level = questionPools[difficulty]
