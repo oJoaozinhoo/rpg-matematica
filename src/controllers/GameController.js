@@ -154,9 +154,14 @@ function getHardestTopic() {
     return bWeight - aWeight;
   });
 
-  return source[0][0];
-}
+  const hardest = source[0];
 
+  if (hardest[1].wrong + hardest[1].timeout === 0) {
+    return "Nenhuma dificuldade! Você acertou todas as questões!";
+  }
+
+  return hardest[0];
+}
 function getLastSpecificTopic() {
   const { lastTopic, statsByTopic } = getState();
 
