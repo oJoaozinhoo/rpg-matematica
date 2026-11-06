@@ -599,14 +599,6 @@ function dismissIntro() {
   }, 850);
 }
 
-  intro.classList.add("anim-intro-out");
-
-  setTimeout(() => {
-    hide("intro");
-    show("menu");
-  }, 850);
-}
-
 function bindEvents() {
   document
     .getElementById("intro")
