@@ -10,8 +10,13 @@ const sounds = {
 function playSound(name) {
   const el = sounds[name];
   if (!el) return;
-  el.currentTime = 0;
-  el.play().catch(() => {});
+el.currentTime = 0;
+
+if (name === "chest") {
+  el.volume = 0.65;
+}
+
+el.play().catch(() => {});
 }
 
 export { playSound };
