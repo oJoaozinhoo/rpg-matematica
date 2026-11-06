@@ -23,6 +23,88 @@ import { show, hide, setEndScreen, fadeOutThen } from "../views/ScreenView.js";
 let countdownInterval = null;
 let selectedTimeLimit = null;
 
+let tutorialCurrentStep = 0;
+
+const tutorialSteps = [
+  {
+    title: "🎮 OBJETIVO DO JOGO",
+    text: "Seu objetivo é derrotar o inimigo respondendo corretamente às questões de Matemática Discreta. Acerte as respostas para causar dano ao adversário e vencer a batalha.",
+  },
+  {
+    title: "⚔️ ESCOLHA SUA DIFICULDADE",
+    text: "Escolha entre Fácil, Normal e Difícil. Cada nível altera a pontuação, o dano causado e a penalidade por respostas incorretas.",
+  },
+  {
+    title: "🧠 RESPONDA ÀS QUESTÕES",
+    text: "Leia atentamente cada questão e escolha uma das alternativas disponíveis. Cada acerto aumenta sua pontuação e causa dano ao inimigo.",
+  },
+  {
+    title: "⏱️ TEMPO E COMBOS",
+    text: "Você pode escolher jogar com tempo limitado ou sem cronômetro. Acerte questões consecutivas para aumentar seu combo e receber bônus de dano e pontuação.",
+  },
+  {
+    title: "🏆 VITÓRIA E DERROTA",
+    text: "Derrote o inimigo para vencer! Cuidado com os erros e com o tempo. No modo One Error, uma única resposta incorreta ou tempo esgotado encerra a partida.",
+  },
+];
+
+function updateTutorial() {
+  const title = document.getElementById("tutorial-title");
+  const text = document.getElementById("tutorial-text");
+  const step = document.getElementById("tutorial-step");
+  const prev = document.getElementById("tutorial-prev");
+  const next = document.getElementById("tutorial-next");
+
+  const current = tutorialSteps[tutorialCurrentStep];
+
+  if (!title || !text || !step || !prev || !next) return;
+
+  title.textContent = current.title;
+  text.textContent = current.text;
+
+  step.textContent =
+    `${tutorialCurrentStep + 1} / ${tutorialSteps.length}`;
+
+  prev.disabled = tutorialCurrentStep === 0;
+
+  next.textContent =
+    tutorialCurrentStep === tutorialSteps.length - 1
+      ? "FINALIZAR"
+      : "PRÓXIMO →";
+}
+
+function openTutorial() {
+  tutorialCurrentStep = 0;
+
+  updateTutorial();
+
+  document
+    .getElementById("tutorial-modal")
+    .classList.remove("hidden");
+}
+
+function closeTutorial() {
+  document
+    .getElementById("tutorial-modal")
+    .classList.add("hidden");
+}
+
+function nextTutorialStep() {
+  if (tutorialCurrentStep < tutorialSteps.length - 1) {
+    tutorialCurrentStep++;
+    updateTutorial();
+  } else {
+    closeTutorial();
+  }
+}
+
+function previousTutorialStep() {
+  if (tutorialCurrentStep > 0) {
+    tutorialCurrentStep--;
+    updateTutorial();
+  }
+}
+
 const POINTS_BY_LEVEL = {
   facil: 10,
   normal: 15,
@@ -560,6 +642,22 @@ function bindEvents() {
   document
     .getElementById("restart-btn")
     .addEventListener("click", restartGame);
+
+  document
+    .getElementById("tutorial-open")
+    .addEventListener("click", openTutorial);
+
+  document
+    .getElementById("tutorial-close")
+    .addEventListener("click", closeTutorial);
+
+  document
+    .getElementById("tutorial-next")
+    .addEventListener("click", nextTutorialStep);
+
+  document
+    .getElementById("tutorial-prev")
+    .addEventListener("click", previousTutorialStep);
 }
 
 bindEvents();
