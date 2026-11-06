@@ -580,9 +580,24 @@ function restartGame() {
   hide("end-screen");
   show("menu");
 }
-
 function dismissIntro() {
   const intro = document.getElementById("intro");
+
+  const bgMusic = document.getElementById("bg-music");
+
+  bgMusic.volume = 0.25;
+
+  bgMusic.play().catch((error) => {
+    console.log("Erro ao iniciar música:", error);
+  });
+
+  intro.classList.add("anim-intro-out");
+
+  setTimeout(() => {
+    hide("intro");
+    show("menu");
+  }, 850);
+}
 
   intro.classList.add("anim-intro-out");
 
