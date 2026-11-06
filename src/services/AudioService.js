@@ -4,6 +4,7 @@ const sounds = {
   error: document.getElementById("snd-error"),
   win: document.getElementById("snd-win"),
   lose: document.getElementById("snd-lose"),
+  chest: document.getElementById("snd-chest"),
 };
 
 function playSound(name) {
