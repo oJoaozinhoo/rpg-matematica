@@ -604,7 +604,7 @@ function dismissIntro() {
   const bgMusic = document.getElementById("bg-music");
 
   if (bgMusic) {
-    bgMusic.volume = 0.25;
+    bgMusic.volume = 0.40;
 
     bgMusic.play().catch((error) => {
       console.error("Erro ao iniciar música:", error);
