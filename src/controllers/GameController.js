@@ -580,16 +580,11 @@ function restartGame() {
   hide("end-screen");
   show("menu");
 }
+
 function dismissIntro() {
+  console.log("Clique na tela inicial detectado!");
+
   const intro = document.getElementById("intro");
-
-  const bgMusic = document.getElementById("bg-music");
-
-  bgMusic.volume = 0.25;
-
-  bgMusic.play().catch((error) => {
-    console.log("Erro ao iniciar música:", error);
-  });
 
   intro.classList.add("anim-intro-out");
 
