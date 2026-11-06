@@ -656,9 +656,12 @@ function bindEvents() {
     .getElementById("restart-btn")
     .addEventListener("click", restartGame);
 
-  document
-    .getElementById("tutorial-open")
-    .addEventListener("click", openTutorial);
+document
+  .getElementById("tutorial-open")
+  .addEventListener("click", () => {
+    playSound("click");
+    openTutorial();
+  });
 
   document
     .getElementById("tutorial-close")
