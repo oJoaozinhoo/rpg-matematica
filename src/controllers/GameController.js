@@ -593,7 +593,9 @@ function dismissIntro() {
 }
 
 function bindEvents() {
-  window.addEventListener("click", dismissIntro, { once: true });
+  document
+    .getElementById("intro")
+    .addEventListener("click", dismissIntro);
 
   document.querySelectorAll(".time-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
