@@ -585,6 +585,15 @@ function dismissIntro() {
   console.log("Clique na tela inicial detectado!");
 
   const intro = document.getElementById("intro");
+  const bgMusic = document.getElementById("bg-music");
+
+  if (bgMusic) {
+    bgMusic.volume = 0.25;
+
+    bgMusic.play().catch((error) => {
+      console.error("Erro ao iniciar música:", error);
+    });
+  }
 
   intro.classList.add("anim-intro-out");
 
