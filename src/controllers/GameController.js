@@ -539,6 +539,7 @@ function startGame(difficulty, gameMode = "classic") {
   });
 }
 
+
 function endGame() {
   stopTimer();
 
@@ -551,25 +552,40 @@ function endGame() {
     maxCombo,
   } = getState();
 
+  const playerWon = enemyHP <= 0;
+
   hide("game-view");
 
-  setEndScreen(
-    enemyHP <= 0,
-    score,
-    {
-      correctAnswers,
-      wrongAnswers,
-      timeoutAnswers,
-      maxCombo,
-    },
-    getHardestTopic(),
-    getLastSpecificTopic(),
-  );
+  const revealResult = () => {
+    setEndScreen(
+      playerWon,
+      score,
+      {
+        correctAnswers,
+        wrongAnswers,
+        timeoutAnswers,
+        maxCombo,
+      },
+      getHardestTopic(),
+      getLastSpecificTopic(),
+    );
 
-  show("end-screen");
+    show("end-screen");
 
-  if (enemyHP <= 0) playSound("win");
-  else playSound("lose");
+    if (playerWon) playSound("win");
+    else playSound("lose");
+  };
+
+  const chestAudio = document.getElementById("snd-chest");
+
+  if (chestAudio) {
+    chestAudio.addEventListener("ended", revealResult, { once: true });
+    chestAudio.addEventListener("error", revealResult, { once: true });
+
+    playSound("chest");
+  } else {
+    revealResult();
+  }
 }
 
 function restartGame() {
