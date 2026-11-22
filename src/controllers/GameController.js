@@ -557,42 +557,24 @@ function endGame() {
 
   hide("game-view");
 
-  const revealResult = () => {
-    setEndScreen(
-      playerWon,
-      score,
-      {
-        correctAnswers,
-        wrongAnswers,
-        timeoutAnswers,
-        maxCombo,
-      },
-      getHardestTopic(),
-      getLastSpecificTopic(),
-    );
+  setEndScreen(
+    playerWon,
+    score,
+    {
+      correctAnswers,
+      wrongAnswers,
+      timeoutAnswers,
+      maxCombo,
+    },
+    getHardestTopic(),
+    getLastSpecificTopic(),
+  );
 
-    show("end-screen");
+  show("end-screen");
 
-    if (playerWon) playSound("win");
-    else playSound("lose");
-  };
-
-  const chestAudio = document.getElementById("snd-chest");
-
-  if (chestAudio) {
-    chestAudio.currentTime = 0;
-    chestAudio.play().catch(() => {});
-
-    setTimeout(() => {
-      chestAudio.pause();
-      chestAudio.currentTime = 0;
-      revealResult();
-    }, 1000);
-  } else {
-    revealResult();
-  }
+  if (playerWon) playSound("win");
+  else playSound("lose");
 }
-
 
 function restartGame() {
   stopTimer();
