@@ -286,7 +286,7 @@ h3 {
   overflow: hidden;
   background:
     linear-gradient(rgba(24, 20, 12, 0.25), rgba(24, 20, 12, 0.55)),
-    url("./image/map.png") center / cover;
+    url("../image/map.png") center / cover;
   box-shadow:
     0 8px 22px rgba(50, 29, 13, 0.45),
     inset 0 0 35px rgba(0, 0, 0, 0.3);
