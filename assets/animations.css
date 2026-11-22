@@ -773,4 +773,27 @@ h3 {
   }
 }
 
+/* Mantém o livro com altura fixa em todas as etapas */
+.tutorial-book {
+  height: 520px;
+  max-height: 85vh;
+  overflow: hidden;
+}
 
+.tutorial-pages {
+  height: 100%;
+  min-height: 0;
+}
+
+.tutorial-left-page,
+.tutorial-right-page {
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.tutorial-content-area {
+  min-height: 0;
+  overflow-y: auto;
+}
