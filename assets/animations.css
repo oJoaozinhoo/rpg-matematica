@@ -210,6 +210,18 @@ h3 {
 }
 
 @keyframes tutorial-fade-in {
+  @keyframes tutorial-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.tutorial-fade-out {
+  animation: tutorial-fade-out 0.35s ease forwards;
+}
   from { opacity: 0; }
   to { opacity: 1; }
 }
