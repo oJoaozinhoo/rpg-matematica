@@ -189,113 +189,82 @@
 
 
 
-<!-- TUTORIAL - LIVRO MEDIEVAL -->
+
+<!-- TUTORIAL - LIVRO MEDIEVAL COM IMAGEM -->
 <div
   id="tutorial-modal"
   class="hidden fixed inset-0 z-[70] tutorial-overlay flex items-center justify-center p-3 sm:p-6"
 >
-  <div class="tutorial-book">
+  <div class="tutorial-image-book">
 
-    <!-- LOMBADA DO LIVRO -->
-    <div class="tutorial-spine"></div>
+    <!-- PÁGINA ESQUERDA -->
+    <div class="tutorial-image-left">
+      <span class="tutorial-image-emblem">⚔️</span>
+      <p>RPG DA</p>
+      <h2>CONTAGEM</h2>
+      <div class="tutorial-image-line"></div>
+      <span class="tutorial-image-subtitle">MANUAL DO AVENTUREIRO</span>
+      <p class="tutorial-image-motto">
+        Conhecimento é sua maior arma.
+      </p>
+    </div>
 
-    <div class="tutorial-pages">
+    <!-- PÁGINA DIREITA -->
+    <div class="tutorial-image-right">
 
-      <!-- PÁGINA ESQUERDA -->
-      <div class="tutorial-left-page">
+      <p class="tutorial-image-overline">
+        GUIA DO AVENTUREIRO
+      </p>
 
-        <div class="tutorial-art">
-          <div class="tutorial-art-overlay"></div>
+      <h2 id="tutorial-title" class="tutorial-image-heading"></h2>
 
-          <div class="tutorial-art-content">
-            <span class="tutorial-emblem">⚔️</span>
-            <p>RPG DA</p>
-            <h2>CONTAGEM</h2>
-            <div class="tutorial-art-line"></div>
-            <span class="tutorial-book-subtitle">
-              MANUAL DO AVENTUREIRO
-            </span>
-          </div>
-        </div>
+      <div class="tutorial-image-divider">✥</div>
 
-        <div class="tutorial-left-footer">
-          <span>✦</span>
-          <p>Conhecimento é sua maior arma.</p>
-          <span>✦</span>
-        </div>
-
+      <div class="tutorial-image-content">
+        <p id="tutorial-text"></p>
       </div>
 
-      <!-- PÁGINA DIREITA -->
-      <div class="tutorial-right-page">
-
-        <div class="tutorial-decoration">✥</div>
-
-        <p class="tutorial-overline">
-          GUIA DO AVENTUREIRO
-        </p>
-
-        <h2 id="tutorial-title" class="tutorial-heading"></h2>
-
-        <div class="tutorial-divider">
-          <span></span>
-          ✥
-          <span></span>
+      <div class="tutorial-image-progress">
+        <p id="tutorial-step"></p>
+        <div class="tutorial-image-track">
+          <div
+            id="tutorial-progress"
+            class="tutorial-image-fill"
+            style="width: 20%"
+          ></div>
         </div>
+      </div>
 
-        <div class="tutorial-content-area">
-          <p id="tutorial-text" class="tutorial-description"></p>
-        </div>
-
-        <div class="tutorial-progress-area">
-
-          <p id="tutorial-step" class="tutorial-step-label"></p>
-
-          <div class="tutorial-progress-track">
-            <div
-              id="tutorial-progress"
-              class="tutorial-progress-fill"
-              style="width: 20%"
-            ></div>
-          </div>
-
-        </div>
-
-        <div class="tutorial-navigation">
-
-          <button
-            id="tutorial-prev"
-            type="button"
-            class="tutorial-nav-button tutorial-prev-button"
-          >
-            ← VOLTAR
-          </button>
-
-          <button
-            id="tutorial-next"
-            type="button"
-            class="tutorial-nav-button tutorial-next-button"
-          >
-            PRÓXIMO →
-          </button>
-
-        </div>
-
+      <div class="tutorial-image-navigation">
         <button
-          id="tutorial-close"
+          id="tutorial-prev"
           type="button"
-          class="tutorial-close-button"
+          class="tutorial-image-button"
         >
-          ✕ FECHAR LIVRO
+          ← VOLTAR
         </button>
 
-        <div class="tutorial-decoration-bottom">✥</div>
-
+        <button
+          id="tutorial-next"
+          type="button"
+          class="tutorial-image-button tutorial-image-next"
+        >
+          PRÓXIMO →
+        </button>
       </div>
+
+      <button
+        id="tutorial-close"
+        type="button"
+        class="tutorial-image-close"
+      >
+        ✕ FECHAR LIVRO
+      </button>
 
     </div>
   </div>
 </div>
+
 
 
     <!-- ÁREA DO JOGO -->
