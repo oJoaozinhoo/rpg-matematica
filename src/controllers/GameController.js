@@ -540,6 +540,7 @@ function startGame(difficulty, gameMode = "classic") {
 }
 
 
+
 function endGame() {
   stopTimer();
 
@@ -579,14 +580,19 @@ function endGame() {
   const chestAudio = document.getElementById("snd-chest");
 
   if (chestAudio) {
-    chestAudio.addEventListener("ended", revealResult, { once: true });
-    chestAudio.addEventListener("error", revealResult, { once: true });
+    chestAudio.currentTime = 0;
+    chestAudio.play().catch(() => {});
 
-    playSound("chest");
+    setTimeout(() => {
+      chestAudio.pause();
+      chestAudio.currentTime = 0;
+      revealResult();
+    }, 1000);
   } else {
     revealResult();
   }
 }
+
 
 function restartGame() {
   stopTimer();
