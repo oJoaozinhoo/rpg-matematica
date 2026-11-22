@@ -95,11 +95,18 @@ function openTutorial() {
 }
 
 function closeTutorial() {
-  document
-    .getElementById("tutorial-modal")
-    .classList.add("hidden");
-}
+  const tutorial = document.getElementById("tutorial-modal");
 
+  if (!tutorial || tutorial.classList.contains("hidden")) return;
+
+  tutorial.classList.remove("tutorial-fade-in");
+  tutorial.classList.add("tutorial-fade-out");
+
+  setTimeout(() => {
+    tutorial.classList.add("hidden");
+    tutorial.classList.remove("tutorial-fade-out");
+  }, 350);
+}
 function nextTutorialStep() {
   if (tutorialCurrentStep < tutorialSteps.length - 1) {
     tutorialCurrentStep++;
