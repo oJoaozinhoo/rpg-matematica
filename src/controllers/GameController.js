@@ -48,12 +48,14 @@ const tutorialSteps = [
   },
 ];
 
+
 function updateTutorial() {
   const title = document.getElementById("tutorial-title");
   const text = document.getElementById("tutorial-text");
   const step = document.getElementById("tutorial-step");
   const prev = document.getElementById("tutorial-prev");
   const next = document.getElementById("tutorial-next");
+  const progress = document.getElementById("tutorial-progress");
 
   const current = tutorialSteps[tutorialCurrentStep];
 
@@ -63,7 +65,15 @@ function updateTutorial() {
   text.textContent = current.text;
 
   step.textContent =
-    `${tutorialCurrentStep + 1} / ${tutorialSteps.length}`;
+    `ETAPA ${tutorialCurrentStep + 1} DE ${tutorialSteps.length}`;
+
+  // Atualiza a barra de progresso
+  if (progress) {
+    const percentage =
+      ((tutorialCurrentStep + 1) / tutorialSteps.length) * 100;
+
+    progress.style.width = `${percentage}%`;
+  }
 
   prev.disabled = tutorialCurrentStep === 0;
 
@@ -72,6 +82,7 @@ function updateTutorial() {
       ? "FINALIZAR"
       : "PRÓXIMO →";
 }
+
 
 function openTutorial() {
   tutorialCurrentStep = 0;
