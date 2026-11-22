@@ -188,70 +188,112 @@
     </div>
 
 
-<!-- TUTORIAL -->
+
+<!-- TUTORIAL - LIVRO MEDIEVAL -->
 <div
   id="tutorial-modal"
-  class="hidden fixed inset-0 z-[70] bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
+  class="hidden fixed inset-0 z-[70] tutorial-overlay flex items-center justify-center p-3 sm:p-6"
 >
-  <div
-    class="relative w-full max-w-lg max-h-[85vh] overflow-y-auto rounded-2xl border-2 border-[#c9a448] bg-gradient-to-b from-[#21172b] to-[#0c0914] shadow-[0_0_40px_rgba(212,175,55,0.2)] p-6 sm:p-8 text-center"
-  >
-    <div class="text-4xl mb-3">📜</div>
+  <div class="tutorial-book">
 
-    <p class="text-gold-light/60 text-xs tracking-[0.3em] uppercase mb-2">
-      Manual do aventureiro
-    </p>
+    <!-- LOMBADA DO LIVRO -->
+    <div class="tutorial-spine"></div>
 
-    <h2
-      id="tutorial-title"
-      class="font-display text-2xl sm:text-3xl text-gold-light mb-5 [text-shadow:0_0_15px_rgba(212,175,55,0.4)]"
-    ></h2>
+    <div class="tutorial-pages">
 
-    <div class="w-20 h-px bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-5"></div>
+      <!-- PÁGINA ESQUERDA -->
+      <div class="tutorial-left-page">
 
-    <p
-      id="tutorial-text"
-      class="text-white/90 leading-relaxed text-base sm:text-lg mb-7 min-h-[100px]"
-    ></p>
+        <div class="tutorial-art">
+          <div class="tutorial-art-overlay"></div>
 
-    <p
-      id="tutorial-step"
-      class="text-gold-light/70 text-sm tracking-widest mb-3"
-    ></p>
+          <div class="tutorial-art-content">
+            <span class="tutorial-emblem">⚔️</span>
+            <p>RPG DA</p>
+            <h2>CONTAGEM</h2>
+            <div class="tutorial-art-line"></div>
+            <span class="tutorial-book-subtitle">
+              MANUAL DO AVENTUREIRO
+            </span>
+          </div>
+        </div>
 
-    <div class="w-full h-2 rounded-full bg-black/60 border border-gold/20 overflow-hidden mb-6">
-      <div
-        id="tutorial-progress"
-        class="h-full rounded-full bg-gradient-to-r from-amber-600 to-yellow-300 transition-all duration-300"
-        style="width: 20%"
-      ></div>
+        <div class="tutorial-left-footer">
+          <span>✦</span>
+          <p>Conhecimento é sua maior arma.</p>
+          <span>✦</span>
+        </div>
+
+      </div>
+
+      <!-- PÁGINA DIREITA -->
+      <div class="tutorial-right-page">
+
+        <div class="tutorial-decoration">✥</div>
+
+        <p class="tutorial-overline">
+          GUIA DO AVENTUREIRO
+        </p>
+
+        <h2 id="tutorial-title" class="tutorial-heading"></h2>
+
+        <div class="tutorial-divider">
+          <span></span>
+          ✥
+          <span></span>
+        </div>
+
+        <div class="tutorial-content-area">
+          <p id="tutorial-text" class="tutorial-description"></p>
+        </div>
+
+        <div class="tutorial-progress-area">
+
+          <p id="tutorial-step" class="tutorial-step-label"></p>
+
+          <div class="tutorial-progress-track">
+            <div
+              id="tutorial-progress"
+              class="tutorial-progress-fill"
+              style="width: 20%"
+            ></div>
+          </div>
+
+        </div>
+
+        <div class="tutorial-navigation">
+
+          <button
+            id="tutorial-prev"
+            type="button"
+            class="tutorial-nav-button tutorial-prev-button"
+          >
+            ← VOLTAR
+          </button>
+
+          <button
+            id="tutorial-next"
+            type="button"
+            class="tutorial-nav-button tutorial-next-button"
+          >
+            PRÓXIMO →
+          </button>
+
+        </div>
+
+        <button
+          id="tutorial-close"
+          type="button"
+          class="tutorial-close-button"
+        >
+          ✕ FECHAR LIVRO
+        </button>
+
+        <div class="tutorial-decoration-bottom">✥</div>
+
+      </div>
+
     </div>
-
-    <div class="flex gap-3">
-      <button
-        id="tutorial-prev"
-        type="button"
-        class="flex-1 py-3 rounded-lg border border-gold/30 bg-black/40 text-gold-light font-semibold hover:bg-gold/10 transition-all disabled:opacity-30"
-      >
-        ← VOLTAR
-      </button>
-
-      <button
-        id="tutorial-next"
-        type="button"
-        class="flex-1 py-3 rounded-lg font-display tracking-wider text-white bg-gradient-to-br from-amber-500 to-amber-800 border border-amber-300/40 shadow-lg hover:brightness-125 hover:scale-[1.03] transition-all"
-      >
-        PRÓXIMO →
-      </button>
-    </div>
-
-    <button
-      id="tutorial-close"
-      type="button"
-      class="mt-5 text-xs tracking-widest text-white/40 hover:text-gold-light transition-colors"
-    >
-      FECHAR TUTORIAL
-    </button>
   </div>
 </div>
 
