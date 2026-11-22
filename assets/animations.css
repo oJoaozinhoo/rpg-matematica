@@ -677,3 +677,100 @@ h3 {
   }
 }
 
+
+/* =========================================
+   ACABAMENTO MEDIEVAL EXTRA
+   ========================================= */
+
+/* Formato irregular das páginas */
+.tutorial-left-page {
+  border-radius: 28px 8px 12px 35px;
+  clip-path: polygon(
+    2% 0,
+    98% 1%,
+    100% 98%,
+    3% 100%,
+    0 94%,
+    1% 8%
+  );
+}
+
+.tutorial-right-page {
+  border-radius: 8px 28px 35px 12px;
+  clip-path: polygon(
+    2% 1%,
+    98% 0,
+    100% 8%,
+    99% 94%,
+    97% 100%,
+    0 98%
+  );
+}
+
+/* Ornamentos nos cantos da moldura */
+.tutorial-right-page::after {
+  content: "❧";
+  position: absolute;
+  left: 25px;
+  bottom: 18px;
+  color: rgba(126, 83, 40, 0.55);
+  font-size: 30px;
+  transform: rotate(-25deg);
+  pointer-events: none;
+}
+
+/* Moldura dourada mais trabalhada */
+.tutorial-book {
+  border: 7px ridge #95683c;
+  border-radius: 35px 15px 35px 15px;
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.9),
+    inset 0 0 0 2px #d0a16a,
+    inset 0 0 25px #1a0e08,
+    0 0 22px rgba(212, 175, 55, 0.2);
+}
+
+/* Ilustração com arco medieval */
+.tutorial-art {
+  border-radius: 48% 48% 12px 12px / 18% 18% 12px 12px;
+  border: 8px ridge #95683c;
+}
+
+/* Cabeçalho com aparência de manuscrito */
+.tutorial-heading {
+  font-variant: small-caps;
+  letter-spacing: 1px;
+}
+
+/* Botões com aparência de placas antigas */
+.tutorial-nav-button {
+  border-radius: 16px 5px 16px 5px;
+  border-style: ridge;
+  border-width: 3px;
+  text-shadow: 0 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Lombada com detalhes de livro antigo */
+.tutorial-spine {
+  background: linear-gradient(
+    90deg,
+    #3b2114,
+    #a97845,
+    #e0bb7e,
+    #704323,
+    #321b10
+  );
+  box-shadow:
+    0 0 12px rgba(0, 0, 0, 0.6),
+    inset 2px 0 4px rgba(255,255,255,0.2),
+    inset -2px 0 4px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 650px) {
+  .tutorial-left-page,
+  .tutorial-right-page {
+    clip-path: none;
+  }
+}
+
+
