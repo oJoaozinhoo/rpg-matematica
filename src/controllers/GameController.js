@@ -608,6 +608,20 @@ function restartGame() {
   show("menu");
 }
 
+
+function returnToMenu() {
+  stopTimer();
+
+  document.getElementById("explanation-screen").classList.add("hidden");
+
+  hide("game-view");
+  hide("end-screen");
+  show("menu");
+
+  playSound("click");
+}
+
+
 function dismissIntro() {
   console.log("Clique na tela inicial detectado!");
 
@@ -682,6 +696,10 @@ function bindEvents() {
   document
     .getElementById("restart-btn")
     .addEventListener("click", restartGame);
+
+  document
+  .getElementById("back-to-menu-btn")
+  .addEventListener("click", returnToMenu);
 
 document
   .getElementById("tutorial-open")
