@@ -435,13 +435,13 @@ h3 {
     display: none;
   }
 
-  .tutorial-image-right {
-    top: 8%;
-    left: 7%;
-    width: 86%;
-    height: 84%;
-    padding: 8% 5%;
-  }
+.tutorial-image-right {
+  top: 8%;
+  left: 7%;
+  width: 86%;
+  height: 84%;
+  padding: 8% 8% 8% 3%;
+}
 
   .tutorial-image-heading {
     font-size: clamp(19px, 5vw, 25px);
