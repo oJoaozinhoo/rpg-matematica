@@ -209,22 +209,31 @@ h3 {
   animation: tutorial-fade-in 0.35s ease;
 }
 
+
 @keyframes tutorial-fade-in {
-  @keyframes tutorial-fade-out {
   from {
-    opacity: 1;
-  }
-  to {
     opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }
 
 .tutorial-fade-out {
   animation: tutorial-fade-out 0.35s ease forwards;
 }
-  from { opacity: 0; }
-  to { opacity: 1; }
+
+@keyframes tutorial-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }
+
 
 .tutorial-image-book {
   position: relative;
