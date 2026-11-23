@@ -99,7 +99,11 @@ function closeTutorial() {
 
   if (!tutorial || tutorial.classList.contains("hidden")) return;
 
-  tutorial.classList.remove("tutorial-fade-in");
+  tutorial.classList.remove("tutorial-fade-out");
+
+  // Reinicia a animação de saída
+  void tutorial.offsetWidth;
+
   tutorial.classList.add("tutorial-fade-out");
 
   setTimeout(() => {
@@ -107,6 +111,7 @@ function closeTutorial() {
     tutorial.classList.remove("tutorial-fade-out");
   }, 350);
 }
+
 function nextTutorialStep() {
   if (tutorialCurrentStep < tutorialSteps.length - 1) {
     tutorialCurrentStep++;
