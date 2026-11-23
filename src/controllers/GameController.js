@@ -85,24 +85,23 @@ function updateTutorial() {
 
 
 function openTutorial() {
-  tutorialCurrentStep = 0;
+  const tutorial = document.getElementById("tutorial-modal");
 
+  tutorialCurrentStep = 0;
   updateTutorial();
 
-  document
-    .getElementById("tutorial-modal")
-    .classList.remove("hidden");
+  tutorial.classList.remove("tutorial-fade-out");
+  tutorial.classList.add("hidden");
+
+  void tutorial.offsetWidth;
+
+  tutorial.classList.remove("hidden");
 }
 
 function closeTutorial() {
   const tutorial = document.getElementById("tutorial-modal");
 
   if (!tutorial || tutorial.classList.contains("hidden")) return;
-
-  tutorial.classList.remove("tutorial-fade-out");
-
-  // Reinicia a animação de saída
-  void tutorial.offsetWidth;
 
   tutorial.classList.add("tutorial-fade-out");
 
