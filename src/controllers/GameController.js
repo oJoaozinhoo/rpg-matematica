@@ -25,26 +25,27 @@ let selectedTimeLimit = null;
 
 let tutorialCurrentStep = 0;
 
+
 const tutorialSteps = [
   {
-    title: "🎮 OBJETIVO DO JOGO",
-    text: "Seu objetivo é derrotar o inimigo respondendo corretamente às questões de Matemática Discreta. Acerte as respostas para causar dano ao adversário e vencer a batalha.",
+    title: "🛡️ SUA JORNADA COMEÇA!",
+    text: "Aventureiro, prepare-se! Seu objetivo é derrotar o Mestre das Relações em um duelo de conhecimento. Resolva os desafios de Matemática Discreta para atacar seu inimigo. Cada resposta correta aproxima você da vitória!"
   },
   {
-    title: "⚔️ ESCOLHA SUA DIFICULDADE",
-    text: "Escolha entre Fácil, Normal e Difícil. Cada nível altera a pontuação, o dano causado e a penalidade por respostas incorretas.",
+    title: "⚔️ ESCOLHA SEU DESAFIO!",
+    text: "Toda aventura exige estratégia! Escolha sua dificuldade: Fácil, Normal ou Difícil. Quanto maior o desafio, maior será sua recompensa em pontos. Mas cuidado: errar também tem suas consequências!"
   },
   {
-    title: "🧠 RESPONDA ÀS QUESTÕES",
-    text: "Leia atentamente cada questão e escolha uma das alternativas disponíveis. Cada acerto aumenta sua pontuação e causa dano ao inimigo.",
+    title: "📜 RESOLVA OS ENIGMAS!",
+    text: "Chegou a hora de testar sua inteligência! Leia cada pergunta com atenção e escolha a alternativa correta. Acerte para causar dano ao inimigo e avance rumo à vitória. Use seu raciocínio antes de cada decisão!"
   },
   {
-    title: "⏱️ TEMPO E COMBOS",
-    text: "Você pode escolher jogar com tempo limitado ou sem cronômetro. Acerte questões consecutivas para aumentar seu combo e receber bônus de dano e pontuação.",
+    title: "⏳ O TEMPO É SEU INIMIGO!",
+    text: "Escolha se deseja enfrentar a batalha com tempo limitado ou sem cronômetro. Acertos consecutivos formam combos, aumentando seus bônus de dano e pontuação. Mantenha a concentração e não perca o ritmo!"
   },
   {
-    title: "🏆 VITÓRIA E DERROTA",
-    text: "Derrote o inimigo para vencer! Cuidado com os erros e com o tempo. No modo One Error, uma única resposta incorreta ou tempo esgotado encerra a partida.",
+    title: "🏆 CONQUISTE A VITÓRIA!",
+    text: "Derrote o Mestre das Relações e prove seu domínio! Mas fique atento: seus erros e o tempo podem decidir o resultado da batalha. No modo One Error, um único erro ou o fim do tempo encerra sua jornada. Boa sorte, aventureiro!"
   },
 ];
 
